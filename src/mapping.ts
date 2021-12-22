@@ -397,9 +397,6 @@ export function handleSwap(event: Swap): void {
     let amount0Out = convertTokenToDecimal(event.params.amount0Out, token0.decimals)
     let amount1Out = convertTokenToDecimal(event.params.amount1Out, token1.decimals)
 
-    // FIXME: write new porfolio entity with fresh price of asset
-
-
     // totals for volume updates
     let amount0Total = amount0Out.plus(amount0In)
     let amount1Total = amount1Out.plus(amount1In)
