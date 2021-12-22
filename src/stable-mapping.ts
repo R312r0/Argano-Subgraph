@@ -26,10 +26,10 @@ export function handlePoolMint(event: Minted): void {
         tx.token0 = agousd.symbol
         tx.tokenShare = cnusd.symbol
         tx.token1 = usdt.symbol
-        tx.amount0 = convertTokenToDecimal(event.params.collateralAmount, agousd.decimals);
+        tx.amount0 = convertTokenToDecimal(event.params.collateralAmount, usdt.decimals);
         tx.amountShare = convertTokenToDecimal(event.params.shareAmount, cnusd.decimals);
-        tx.amount1 = convertTokenToDecimal(event.params.dollarAmount, usdt.decimals);
-        tx.amountTotalUSD = event.params.dollarAmount.toBigDecimal().times(agousd.priceUSD)
+        tx.amount1 = convertTokenToDecimal(event.params.dollarAmount, agousd.decimals);
+        tx.amountTotalUSD = tx.amount1.times(agousd.priceUSD)
         tx.timestamp = event.block.timestamp
         tx.save();
     }
@@ -43,10 +43,10 @@ export function handlePoolMint(event: Minted): void {
         tx.token0 = agobtc.symbol
         tx.tokenShare = cnbtc.symbol
         tx.token1 = wbtc.symbol
-        tx.amount0 = convertTokenToDecimal(event.params.collateralAmount, agobtc.decimals)
+        tx.amount0 = convertTokenToDecimal(event.params.collateralAmount, wbtc.decimals)
         tx.amountShare = convertTokenToDecimal(event.params.shareAmount, cnbtc.decimals)
-        tx.amount1 = convertTokenToDecimal(event.params.dollarAmount, wbtc.decimals)
-        tx.amountTotalUSD = event.params.dollarAmount.toBigDecimal().times(agobtc.priceUSD)
+        tx.amount1 = convertTokenToDecimal(event.params.dollarAmount, agobtc.decimals)
+        tx.amountTotalUSD = tx.amount1.times(agobtc.priceUSD)
         tx.timestamp = event.block.timestamp
         tx.save();
     }
@@ -70,7 +70,7 @@ export function handlePoolRedeem(event: Redeemed): void {
         tx.amount0 = convertTokenToDecimal(event.params.dollarAmount, agousd.decimals);
         tx.amountShare = convertTokenToDecimal(event.params.shareAmount, cnusd.decimals);
         tx.amount1 = convertTokenToDecimal(event.params.collateralAmount, usdt.decimals);
-        tx.amountTotalUSD = event.params.dollarAmount.toBigDecimal().times(agousd.priceUSD)
+        tx.amountTotalUSD = tx.amount0.times(agousd.priceUSD)
         tx.timestamp = event.block.timestamp
         tx.save();
     }
@@ -87,7 +87,7 @@ export function handlePoolRedeem(event: Redeemed): void {
         tx.amount0 = convertTokenToDecimal(event.params.dollarAmount, agobtc.decimals)
         tx.amountShare = convertTokenToDecimal(event.params.shareAmount, cnbtc.decimals)
         tx.amount1 = convertTokenToDecimal(event.params.collateralAmount, wbtc.decimals)
-        tx.amountTotalUSD = event.params.dollarAmount.toBigDecimal().times(agobtc.priceUSD)
+        tx.amountTotalUSD = tx.amount0.times(agobtc.priceUSD)
         tx.timestamp = event.block.timestamp
         tx.save();
     }
@@ -109,7 +109,7 @@ export function handlePoolCollectRedemption(event: RedemptionCollected): void {
         tx.amount0 = convertTokenToDecimal(event.params.collateralAmount, usdt.decimals)
         tx.amountShare = convertTokenToDecimal(event.params.shareAmount, cnusd.decimals);
         tx.amount1 = ZERO_BD;
-        tx.amountTotalUSD = event.params.collateralAmount.toBigDecimal().times(usdt.priceUSD).plus(event.params.shareAmount.toBigDecimal().times(cnusd.priceUSD))
+        tx.amountTotalUSD = tx.amount0.times(usdt.priceUSD).plus(tx.amountShare.times(cnusd.priceUSD))
         tx.timestamp = event.block.timestamp
         tx.save();
     }
@@ -125,7 +125,7 @@ export function handlePoolCollectRedemption(event: RedemptionCollected): void {
         tx.amount0 = convertTokenToDecimal(event.params.collateralAmount, wbtc.decimals)
         tx.amountShare = convertTokenToDecimal(event.params.shareAmount, cnbtc.decimals)
         tx.amount1 = ZERO_BD
-        tx.amountTotalUSD = event.params.collateralAmount.toBigDecimal().times(wbtc.priceUSD).plus(event.params.shareAmount.toBigDecimal().times(cnbtc.priceUSD))
+        tx.amountTotalUSD = tx.amount0.times(wbtc.priceUSD).plus(tx.amountShare.times(cnbtc.priceUSD))
         tx.timestamp = event.block.timestamp
         tx.save();
     }
