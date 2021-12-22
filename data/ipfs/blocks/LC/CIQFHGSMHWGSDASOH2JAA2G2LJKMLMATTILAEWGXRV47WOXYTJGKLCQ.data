@@ -1,0 +1,73 @@
+
+×ÏdataSources:
+  - kind: ethereum/contract
+    mapping:
+      abis:
+        - file:
+            /: /ipfs/QmZ55G1yYFzde8Vcq4cpLfNgPSEibpLi9aYCqS1jEvCKQ9
+          name: Factory
+        - file:
+            /: /ipfs/QmXuTbDkNrN27VydxbS2huvKRk62PMgUTdPDWkxcr2w7j2
+          name: ERC20
+        - file:
+            /: /ipfs/QmbHnhUFZa6qqqRyubUYhXntox1TCBxqryaBM1iNGqVJzT
+          name: ERC20SymbolBytes
+        - file:
+            /: /ipfs/QmQCP6Pdp1MqpwRv2qoPHuUTwZGy7Q3eDHg4w5kzwE9mBj
+          name: ERC20NameBytes
+      apiVersion: 0.0.4
+      entities:
+        - Transaction
+        - Pair
+        - Token
+      eventHandlers:
+        - event: 'PairCreated(indexed address,indexed address,address,uint256)'
+          handler: handleNewPair
+      file:
+        /: /ipfs/QmQ91c7jnSdt5CjK2r6KX4FryDYzEJdfyugh89wnycN3hc
+      kind: ethereum/events
+      language: wasm/assemblyscript
+    name: Factory
+    network: mumbai
+    source:
+      abi: Factory
+      address: '0xe0559a9e01d1528a5946f401f6f61d43810de590'
+      startBlock: 22339829
+description: ERC20 Shit Coin
+schema:
+  file:
+    /: /ipfs/QmUjYVt8UyKBiAyHDWqU3YDtr7wwyiySG1yZ4bfgrzgoFs
+specVersion: 0.0.2
+templates:
+  - kind: ethereum/contract
+    mapping:
+      abis:
+        - file:
+            /: /ipfs/QmbPLMADBP8L6LBVP3ZBQ8RgG7ghamD8DvbdUxHAjZrLgm
+          name: Pair
+        - file:
+            /: /ipfs/QmZ55G1yYFzde8Vcq4cpLfNgPSEibpLi9aYCqS1jEvCKQ9
+          name: Factory
+      apiVersion: 0.0.4
+      entities:
+        - Transaction
+      eventHandlers:
+        - event: 'Mint(indexed address,uint256,uint256)'
+          handler: handleMint
+        - event: 'Burn(indexed address,uint256,uint256,indexed address)'
+          handler: handleBurn
+        - event: >-
+            Swap(indexed address,uint256,uint256,uint256,uint256,indexed
+            address)
+          handler: handleSwap
+        - event: 'Sync(uint112,uint112)'
+          handler: handleSync
+      file:
+        /: /ipfs/QmQ91c7jnSdt5CjK2r6KX4FryDYzEJdfyugh89wnycN3hc
+      kind: ethereum/events
+      language: wasm/assemblyscript
+    name: Pair
+    network: mumbai
+    source:
+      abi: Pair
+Ï
