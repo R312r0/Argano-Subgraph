@@ -19,7 +19,7 @@ export let ZERO_BD = BigDecimal.fromString('0')
 export let ONE_BD = BigDecimal.fromString('1')
 export let BI_18 = BigInt.fromI32(18)
 
-let REWARD_TYPE_WHITELIST: string[] = [
+export const REWARD_TYPE_WHITELIST: string[] = [
   '0x93eefbe7763f3a62a84ee3d35e092c3149d91988'.toLowerCase(), // AGO - WMATIC
   '0xf450696388adf29885dcb7065140e23731b5460f'.toLowerCase(), // AGOUSD - USDT
   '0x6947ef24d75a4508462ffd9fc68b4038a6cacf34'.toLowerCase(), // AGOBTC - WBTC
@@ -27,7 +27,13 @@ let REWARD_TYPE_WHITELIST: string[] = [
   '0xaf25337920942fb0ae9e42fe6e677a3dce451b35'.toLowerCase(), // CNBTC - WMATIC
 ]
 
-export const WHITELIST_USER_PORTFOLIO = [
+export const SINGLE_STAKING_POOL: string[] = [
+    "0x4712D01F889FFc0e729a9B7E6228F4B6c3ec5Daa".toLowerCase(), // AGO address
+    "0x3295a41Bb929dCE32CC4598b8B6a1A032E72E1c0".toLowerCase(), // AGOUSD address
+    "0x3Ca12532Ca8F65C2C296729514170c5146548bAF".toLowerCase() // AGOBTC address
+]
+
+export const WHITELIST_USER_PORTFOLIO: string[] = [
     '0x4712D01F889FFc0e729a9B7E6228F4B6c3ec5Daa'.toLowerCase(), // AGO
     '0x3295a41Bb929dCE32CC4598b8B6a1A032E72E1c0'.toLowerCase(), // AGOUSD
     '0x7F4709a14ff74184db51b50d27c11fC9e4A59C02'.toLowerCase(), // CNUSD

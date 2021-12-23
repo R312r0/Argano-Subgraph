@@ -32,6 +32,31 @@ dataSources:
           handler: handleNewPair
       file: ./src/mapping.ts
   - kind: ethereum/contract
+    name: MasterChef
+    network: mumbai
+    source:
+      address: '0xe3b49f1382e146b6C2c7E497d4A32b39D2AD07B6'
+      abi: MasterChef
+      startBlock: 22339829
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Transaction
+        - UniswapFactory
+      abis:
+        - name: MasterChef
+          file: ./abis/MasterChef.json
+        - name: ERC20Contract
+          file: ./abis/ERC20Contract.json
+      eventHandlers:
+        - event: Deposit(indexed address,indexed uint256,uint256)
+          handler: handleStake
+        - event: Withdraw(indexed address,indexed uint256,uint256)
+          handler: handleUnStake
+      file: ./src/staking-masterchef-foundry.ts
+  - kind: ethereum/contract
     name: PoolAGOUSD
     network: mumbai
     source:

@@ -29,7 +29,7 @@ export function handlePoolMint(event: Minted): void {
         tx.amount0 = convertTokenToDecimal(event.params.collateralAmount, usdt.decimals);
         tx.amountShare = convertTokenToDecimal(event.params.shareAmount, cnusd.decimals);
         tx.amount1 = convertTokenToDecimal(event.params.dollarAmount, agousd.decimals);
-        tx.amountTotalUSD = tx.amount1.times(agousd.priceUSD)
+        tx.amountTotalUSD = convertTokenToDecimal(event.params.dollarAmount, agousd.decimals).times(agousd.priceUSD)
         tx.timestamp = event.block.timestamp
         tx.save();
     }
@@ -46,7 +46,7 @@ export function handlePoolMint(event: Minted): void {
         tx.amount0 = convertTokenToDecimal(event.params.collateralAmount, wbtc.decimals)
         tx.amountShare = convertTokenToDecimal(event.params.shareAmount, cnbtc.decimals)
         tx.amount1 = convertTokenToDecimal(event.params.dollarAmount, agobtc.decimals)
-        tx.amountTotalUSD = tx.amount1.times(agobtc.priceUSD)
+        tx.amountTotalUSD = convertTokenToDecimal(event.params.dollarAmount, agobtc.decimals).times(agobtc.priceUSD)
         tx.timestamp = event.block.timestamp
         tx.save();
     }
@@ -70,7 +70,7 @@ export function handlePoolRedeem(event: Redeemed): void {
         tx.amount0 = convertTokenToDecimal(event.params.dollarAmount, agousd.decimals);
         tx.amountShare = convertTokenToDecimal(event.params.shareAmount, cnusd.decimals);
         tx.amount1 = convertTokenToDecimal(event.params.collateralAmount, usdt.decimals);
-        tx.amountTotalUSD = tx.amount0.times(agousd.priceUSD)
+        tx.amountTotalUSD = convertTokenToDecimal(event.params.dollarAmount, agousd.decimals).times(agousd.priceUSD)
         tx.timestamp = event.block.timestamp
         tx.save();
     }
@@ -87,7 +87,7 @@ export function handlePoolRedeem(event: Redeemed): void {
         tx.amount0 = convertTokenToDecimal(event.params.dollarAmount, agobtc.decimals)
         tx.amountShare = convertTokenToDecimal(event.params.shareAmount, cnbtc.decimals)
         tx.amount1 = convertTokenToDecimal(event.params.collateralAmount, wbtc.decimals)
-        tx.amountTotalUSD = tx.amount0.times(agobtc.priceUSD)
+        tx.amountTotalUSD = convertTokenToDecimal(event.params.dollarAmount, agobtc.decimals).times(agobtc.priceUSD)
         tx.timestamp = event.block.timestamp
         tx.save();
     }
@@ -109,7 +109,7 @@ export function handlePoolCollectRedemption(event: RedemptionCollected): void {
         tx.amount0 = convertTokenToDecimal(event.params.collateralAmount, usdt.decimals)
         tx.amountShare = convertTokenToDecimal(event.params.shareAmount, cnusd.decimals);
         tx.amount1 = ZERO_BD;
-        tx.amountTotalUSD = tx.amount0.times(usdt.priceUSD).plus(tx.amountShare.times(cnusd.priceUSD))
+        tx.amountTotalUSD = convertTokenToDecimal(event.params.collateralAmount, usdt.decimals).times(usdt.priceUSD).plus(convertTokenToDecimal(event.params.shareAmount, cnusd.decimals).times(cnusd.priceUSD))
         tx.timestamp = event.block.timestamp
         tx.save();
     }
@@ -125,7 +125,7 @@ export function handlePoolCollectRedemption(event: RedemptionCollected): void {
         tx.amount0 = convertTokenToDecimal(event.params.collateralAmount, wbtc.decimals)
         tx.amountShare = convertTokenToDecimal(event.params.shareAmount, cnbtc.decimals)
         tx.amount1 = ZERO_BD
-        tx.amountTotalUSD = tx.amount0.times(wbtc.priceUSD).plus(tx.amountShare.times(cnbtc.priceUSD))
+        tx.amountTotalUSD = convertTokenToDecimal(event.params.collateralAmount, wbtc.decimals).times(wbtc.priceUSD).plus(convertTokenToDecimal(event.params.shareAmount, cnbtc.decimals).times(cnbtc.priceUSD))
         tx.timestamp = event.block.timestamp
         tx.save();
     }
